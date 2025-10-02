@@ -1,8 +1,19 @@
 import type { Config } from "tailwindcss";
 
+// Tailwind CSS configuration for Next.js 14 App Router
+// This config defines the design system for the Ani3Lix platform
 export default {
+  // Dark mode configuration using class-based strategy
+  // Allows toggling dark mode by adding/removing 'dark' class on HTML element
   darkMode: ["class"],
-  content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
+  
+  // Content paths - tells Tailwind where to look for class names to generate CSS
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",        // Next.js App Router pages and layouts
+    "./components/**/*.{js,ts,jsx,tsx,mdx}", // Shared UI components (shadcn/ui)
+    "./lib/**/*.{js,ts,jsx,tsx}",           // Utility functions that may contain JSX
+    "./hooks/**/*.{js,ts,jsx,tsx}",         // Custom hooks that may return JSX
+  ],
   theme: {
     extend: {
       borderRadius: {

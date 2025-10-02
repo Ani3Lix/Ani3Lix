@@ -1,0 +1,423 @@
+/* Import Google Fonts for typography */
+/* Inter: Modern sans-serif font for body text and UI elements */
+/* JetBrains Mono: Monospace font for code blocks and technical content */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Tailwind CSS base styles - resets and default element styles */
+@tailwind base;
+/* Tailwind CSS component classes - reusable component utilities */
+@tailwind components;
+/* Tailwind CSS utility classes - single-purpose utility classes */
+@tailwind utilities;
+
+/* Root CSS custom properties for light mode (also serves as default) */
+/* These variables enable theming and consistent design across the app */
+:root {
+  /* Main background color - dark blue-gray for Ani3Lix dark theme */
+  --background: hsl(222, 47%, 11%);
+  /* Main text color - light gray for good contrast on dark background */
+  --foreground: hsl(213, 31%, 91%);
+  
+  /* Card component background - slightly lighter than main background */
+  --card: hsl(217, 33%, 17%);
+  /* Card text color - matches foreground for consistency */
+  --card-foreground: hsl(213, 31%, 91%);
+  
+  /* Popover component background - same as card for consistency */
+  --popover: hsl(217, 33%, 17%);
+  /* Popover text color - matches foreground */
+  --popover-foreground: hsl(213, 31%, 91%);
+  
+  /* Primary brand color - vibrant purple for CTAs and emphasis */
+  --primary: hsl(258, 90%, 66%);
+  /* Text color on primary background - white for maximum contrast */
+  --primary-foreground: hsl(0, 0%, 100%);
+  
+  /* Secondary brand color - cyan/teal for accents and secondary actions */
+  --secondary: hsl(188, 94%, 43%);
+  /* Text color on secondary background - white for contrast */
+  --secondary-foreground: hsl(0, 0%, 100%);
+  
+  /* Muted color for less important UI elements */
+  --muted: hsl(215, 20%, 65%);
+  /* Muted text color - medium gray for subtle text */
+  --muted-foreground: hsl(215, 16%, 47%);
+  
+  /* Accent color - pink for highlights and special elements */
+  --accent: hsl(330, 81%, 60%);
+  /* Text color on accent background - white for contrast */
+  --accent-foreground: hsl(0, 0%, 100%);
+  
+  /* Destructive/error color - red for warnings and destructive actions */
+  --destructive: hsl(0, 84%, 60%);
+  /* Text color on destructive background - white for contrast */
+  --destructive-foreground: hsl(0, 0%, 100%);
+  
+  /* Border color for dividers and component outlines */
+  --border: hsl(217, 33%, 25%);
+  /* Input border color - same as border for consistency */
+  --input: hsl(217, 33%, 25%);
+  /* Focus ring color - matches primary for brand consistency */
+  --ring: hsl(258, 90%, 66%);
+  
+  /* Chart colors for data visualization */
+  --chart-1: hsl(258, 90%, 66%);  /* Primary purple */
+  --chart-2: hsl(188, 94%, 43%);  /* Secondary cyan */
+  --chart-3: hsl(330, 81%, 60%);  /* Accent pink */
+  --chart-4: hsl(0, 84%, 60%);    /* Destructive red */
+  --chart-5: hsl(215, 20%, 65%);  /* Muted gray */
+  
+  /* Sidebar component colors for admin panel */
+  --sidebar-background: hsl(217, 33%, 17%);
+  --sidebar-foreground: hsl(213, 31%, 91%);
+  --sidebar-primary: hsl(258, 90%, 66%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(330, 81%, 60%);
+  --sidebar-accent-foreground: hsl(0, 0%, 100%);
+  --sidebar-border: hsl(217, 33%, 25%);
+  --sidebar-ring: hsl(258, 90%, 66%);
+  
+  /* Font family variables using imported Google Fonts */
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Border radius variable for consistent rounded corners */
+  --radius: 0.5rem;
+}
+
+/* Dark mode color overrides using .dark class */
+/* Currently using same colors as light mode for consistent dark theme */
+.dark {
+  --background: hsl(222, 47%, 11%);
+  --foreground: hsl(213, 31%, 91%);
+  --card: hsl(217, 33%, 17%);
+  --card-foreground: hsl(213, 31%, 91%);
+  --popover: hsl(217, 33%, 17%);
+  --popover-foreground: hsl(213, 31%, 91%);
+  --primary: hsl(258, 90%, 66%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(188, 94%, 43%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(215, 20%, 65%);
+  --muted-foreground: hsl(215, 16%, 47%);
+  --accent: hsl(330, 81%, 60%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(217, 33%, 25%);
+  --input: hsl(217, 33%, 25%);
+  --ring: hsl(258, 90%, 66%);
+}
+
+/* Base layer styles - fundamental element styling */
+@layer base {
+  /* Apply border color variable to all elements */
+  * {
+    @apply border-border;
+  }
+
+  /* Body element styling with background, text color, font, and antialiasing */
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+/* Custom scrollbar styling for better UX in dark theme */
+/* Webkit-based browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  /* Scrollbar track width */
+  width: 12px;
+}
+
+/* Scrollbar track (background) */
+::-webkit-scrollbar-track {
+  /* Use main background color for seamless integration */
+  background: var(--background);
+}
+
+/* Scrollbar thumb (draggable part) */
+::-webkit-scrollbar-thumb {
+  /* Use border color for subtle appearance */
+  background: var(--border);
+  /* Rounded corners for modern look */
+  border-radius: 6px;
+}
+
+/* Scrollbar thumb hover state */
+::-webkit-scrollbar-thumb:hover {
+  /* Lighter color on hover for feedback */
+  background: var(--muted);
+}
+
+/* Smooth transition utility class for interactive elements */
+.transition-smooth {
+  /* Animate all properties with ease-in-out timing */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Card hover effect for elevation and interaction feedback */
+.card-hover:hover {
+  /* Lift card up slightly on hover */
+  transform: translateY(-4px);
+  /* Add depth with shadow */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Skeleton loader animation for loading states */
+@keyframes skeleton-loading {
+  /* Start with gradient off to the right */
+  0% {
+    background-position: 200% 0;
+  }
+  /* End with gradient off to the left - creates shimmer effect */
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Skeleton loader class with shimmer effect */
+.skeleton {
+  /* Gradient from card color to border and back */
+  background: linear-gradient(90deg, 
+    var(--card) 25%, 
+    var(--border) 50%, 
+    var(--card) 75%
+  );
+  /* Make gradient twice the width for smooth animation */
+  background-size: 200% 100%;
+  /* Infinite shimmer animation */
+  animation: skeleton-loading 1.5s infinite;
+}
+
+/* Video player controls gradient overlay */
+.video-controls {
+  /* Gradient from dark to transparent for better button visibility */
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+}
+
+/* Gradient overlay for hero sections with anime banners */
+.gradient-overlay {
+  /* Gradient fades from solid background on edges to transparent in center */
+  background: linear-gradient(to right, 
+    var(--background) 0%, 
+    transparent 50%, 
+    var(--background) 100%
+  );
+}
+
+/* Badge component base styling */
+.badge {
+  /* Flexbox for centered content */
+  display: inline-flex;
+  align-items: center;
+  /* Pill shape with full rounding */
+  border-radius: 9999px;
+  /* Internal padding for badge content */
+  padding: 0.25rem 0.75rem;
+  /* Small text size for compact badges */
+  font-size: 0.75rem;
+  /* Semi-bold weight for emphasis */
+  font-weight: 600;
+  /* Uppercase for consistency and emphasis */
+  text-transform: uppercase;
+  /* Letter spacing for readability */
+  letter-spacing: 0.025em;
+}
+
+/* Line clamp utilities for text truncation */
+/* Truncate to 1 line with ellipsis */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+/* Truncate to 2 lines with ellipsis */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* Truncate to 3 lines with ellipsis */
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* Custom focus ring styling for accessibility */
+.focus-ring:focus {
+  /* Use primary ring color for focus indicator */
+  outline: 2px solid var(--ring);
+  /* Offset from element for better visibility */
+  outline-offset: 2px;
+}
+
+/* Responsive anime card grid layout */
+.anime-grid {
+  /* CSS Grid with auto-fill for responsive columns */
+  display: grid;
+  /* Minimum 200px columns that grow to fill space */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* Gap between grid items */
+  gap: 1.5rem;
+}
+
+/* Mobile-specific grid adjustments */
+@media (max-width: 640px) {
+  .anime-grid {
+    /* Smaller minimum column width for mobile */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    /* Tighter gap on mobile */
+    gap: 1rem;
+  }
+}
+
+/* Video player overlay for play button and controls */
+.video-overlay {
+  /* Cover entire video area */
+  position: absolute;
+  inset: 0;
+  /* Semi-transparent dark overlay */
+  background: rgba(0, 0, 0, 0.5);
+  /* Hidden by default */
+  opacity: 0;
+  /* Smooth fade in/out */
+  transition: opacity 0.2s ease-in-out;
+  /* Center play button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Show overlay on hover */
+.video-overlay:hover {
+  opacity: 1;
+}
+
+/* Comment thread nesting visual indicator */
+.comment-thread {
+  /* Left border for reply indentation */
+  border-left: 2px solid var(--border);
+  /* Indent nested comments */
+  padding-left: 1rem;
+  margin-left: 1rem;
+}
+
+/* Mobile navigation optimizations */
+@media (max-width: 768px) {
+  /* Fixed bottom navigation bar for mobile */
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* Card background for navigation */
+    background: var(--card);
+    /* Top border separator */
+    border-top: 1px solid var(--border);
+    /* Internal padding */
+    padding: 0.5rem;
+    /* Above content */
+    z-index: 50;
+  }
+}
+
+/* Loading spinner animation */
+.loading-spinner {
+  /* Infinite rotation */
+  animation: spin 1s linear infinite;
+}
+
+/* Spin keyframes for loading indicators */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Glassmorphism effect for modal overlays */
+.glass {
+  /* Semi-transparent white background */
+  background: rgba(255, 255, 255, 0.1);
+  /* Blur content behind for glass effect */
+  backdrop-filter: blur(10px);
+  /* Subtle border for definition */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Progress bar for video playback and loading */
+.progress-bar {
+  /* Primary color for progress indicator */
+  background: var(--primary);
+  /* Thin bar height */
+  height: 4px;
+  /* Rounded ends */
+  border-radius: 2px;
+  /* Smooth width transitions */
+  transition: width 0.3s ease-in-out;
+}
+
+/* Primary button styling with hover effects */
+.btn-primary {
+  /* Primary brand color background */
+  background: var(--primary);
+  /* White text for contrast */
+  color: var(--primary-foreground);
+  /* Smooth transitions for all properties */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Primary button hover state */
+.btn-primary:hover {
+  /* Keep primary background */
+  background: var(--primary);
+  /* Brighten on hover for feedback */
+  filter: brightness(1.1);
+  /* Subtle lift effect */
+  transform: translateY(-1px);
+}
+
+/* Admin panel specific background gradient */
+.admin-panel {
+  /* Diagonal gradient from background to card color */
+  background: linear-gradient(135deg, 
+    var(--background) 0%, 
+    var(--card) 100%
+  );
+}
+
+/* Error state component styling */
+.error-state {
+  /* Destructive color for text */
+  color: var(--destructive);
+  /* Light destructive background with transparency */
+  background: hsl(var(--destructive) / 0.1);
+  /* Subtle destructive border */
+  border: 1px solid hsl(var(--destructive) / 0.2);
+  /* Rounded corners */
+  border-radius: var(--radius);
+  /* Internal padding */
+  padding: 1rem;
+}
+
+/* Success state component styling */
+.success-state {
+  /* Green color for success text */
+  color: hsl(142, 76%, 36%);
+  /* Light green background with transparency */
+  background: hsl(142, 76%, 36% / 0.1);
+  /* Subtle green border */
+  border: 1px solid hsl(142, 76%, 36% / 0.2);
+  /* Rounded corners */
+  border-radius: var(--radius);
+  /* Internal padding */
+  padding: 1rem;
+}

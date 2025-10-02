@@ -1,23 +1,76 @@
 {
-  "include": ["client/src/**/*", "shared/**/*", "server/**/*"],
-  "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
+  // TypeScript configuration for Next.js 14 App Router
+  // Specifies which files to include in compilation
+  "include": [
+    "app/**/*",           // Next.js App Router directory - all pages, layouts, and components
+    "components/**/*",    // Shared UI components (shadcn/ui)
+    "lib/**/*",          // Utility functions and helpers
+    "hooks/**/*",        // Custom React hooks
+    "shared/**/*",       // Shared types and schemas (Drizzle)
+    "server/**/*",       // Server-side code (API routes, services)
+    "next-env.d.ts",     // Next.js TypeScript declarations
+    ".next/types/**/*.ts" // Next.js generated types for App Router
+  ],
+  // Files and directories to exclude from compilation
+  "exclude": [
+    "node_modules",      // Third-party dependencies
+    "build",             // Build output directory
+    "dist",              // Distribution directory
+    "**/*.test.ts"       // Test files
+  ],
+  // TypeScript compiler options
   "compilerOptions": {
+    // Incremental compilation for faster builds
     "incremental": true,
+    // Store build info for incremental compilation
     "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo",
-    "noEmit": true,
-    "module": "ESNext",
-    "strict": true,
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "jsx": "preserve",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "allowImportingTsExtensions": true,
-    "moduleResolution": "bundler",
-    "baseUrl": ".",
-    "types": ["node", "vite/client"],
+    
+    // Module system configuration
+    "module": "ESNext",                    // Use latest ECMAScript module syntax
+    "moduleResolution": "bundler",         // Node.js-style module resolution for Next.js
+    "esModuleInterop": true,               // Enable CommonJS/ES module interoperability
+    "resolveJsonModule": true,             // Allow importing JSON files as modules
+    "isolatedModules": true,               // Ensure each file can be safely transpiled
+    
+    // Library and runtime environment
+    "lib": ["esnext", "dom", "dom.iterable"], // Include modern JS and DOM APIs
+    "target": "ES2017",                    // Compile to ES2017 for broad browser support
+    
+    // JSX configuration for React
+    "jsx": "preserve",                     // Preserve JSX for Next.js to transform
+    
+    // Type checking strictness
+    "strict": true,                        // Enable all strict type checking options
+    "noEmit": true,                        // Don't emit compiled files (Next.js handles this)
+    "skipLibCheck": true,                  // Skip type checking of declaration files for faster builds
+    "allowImportingTsExtensions": true,    // Allow importing .ts/.tsx files explicitly
+    "forceConsistentCasingInFileNames": true, // Enforce consistent file name casing
+    
+    // Path mapping for clean imports
+    "baseUrl": ".",                        // Base directory for path resolution
     "paths": {
-      "@/*": ["./client/src/*"],
-      "@shared/*": ["./shared/*"]
-    }
+      "@/*": ["./*"],                      // Map @/ to root directory for components, lib, etc.
+      "@/components/*": ["./components/*"], // Direct path to components
+      "@/lib/*": ["./lib/*"],              // Direct path to utilities
+      "@/hooks/*": ["./hooks/*"],          // Direct path to custom hooks
+      "@/app/*": ["./app/*"],              // Direct path to app directory
+      "@shared/*": ["./shared/*"]          // Direct path to shared schemas
+    },
+    
+    // Next.js specific compiler options
+    "plugins": [
+      {
+        // Next.js TypeScript plugin for App Router type checking
+        "name": "next"
+      }
+    ],
+    
+    // Type definitions to include
+    "types": ["node"],                     // Include Node.js type definitions
+    
+    // Additional options for better IDE support
+    "allowJs": true,                       // Allow JavaScript files in TypeScript project
+    "noUnusedLocals": false,               // Allow unused local variables during development
+    "noUnusedParameters": false            // Allow unused parameters during development
   }
 }
