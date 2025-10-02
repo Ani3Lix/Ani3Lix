@@ -93,12 +93,12 @@ export const favorites = pgTable("favorites", {
 });
 
 // Comments system with nested replies support
-export const comments = pgTable("comments", {
+export const comments: any = pgTable("comments", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`), // Comment unique identifier
   userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }).notNull(), // Comment author
   animeId: uuid("anime_id").references(() => anime.id, { onDelete: "cascade" }), // Anime being commented on
   episodeId: uuid("episode_id").references(() => episodes.id, { onDelete: "cascade" }), // Specific episode if applicable
-  parentCommentId: uuid("parent_comment_id").references(() => comments.id, { onDelete: "cascade" }), // For nested replies
+  parentCommentId: uuid("parent_comment_id").references((): any => comments.id, { onDelete: "cascade" }), // For nested replies
   content: text("content").notNull(), // Comment text content
   likes: integer("likes").notNull().default(0), // Number of likes on comment
   isDeleted: boolean("is_deleted").notNull().default(false), // Soft deletion for conversation preservation
