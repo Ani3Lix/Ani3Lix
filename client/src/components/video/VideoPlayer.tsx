@@ -46,6 +46,8 @@ export function VideoPlayer({
   const [hasError, setHasError] = useState(false); // Error state
   const [showQualityMenu, setShowQualityMenu] = useState(false); // Quality selector
   const [showSubtitlesMenu, setShowSubtitlesMenu] = useState(false); // Subtitles menu
+  const [showSkipIntro, setShowSkipIntro] = useState(false); // Show skip intro button
+  const [showSkipOutro, setShowSkipOutro] = useState(false); // Show skip outro button
 
   // Initialize video player
   useEffect(() => {
@@ -68,6 +70,18 @@ export function VideoPlayer({
         ...prev, 
         currentTime: video.currentTime 
       }));
+      
+      // Check if we should show skip intro button
+      if (episode.introStart !== undefined && episode.introEnd !== undefined) {
+        const isInIntro = video.currentTime >= episode.introStart && video.currentTime <= episode.introEnd;
+        setShowSkipIntro(isInIntro);
+      }
+      
+      // Check if we should show skip outro button
+      if (episode.outroStart !== undefined) {
+        const isInOutro = video.currentTime >= episode.outroStart;
+        setShowSkipOutro(isInOutro);
+      }
     };
 
     const handlePlay = () => {
@@ -222,6 +236,20 @@ export function VideoPlayer({
 
     video.playbackRate = rate;
     setPlayerState(prev => ({ ...prev, playbackRate: rate }));
+  };
+
+  // Skip intro handler
+  const handleSkipIntro = () => {
+    if (episode.introEnd !== undefined) {
+      seekTo(episode.introEnd + 1); // Skip to 1 second after intro ends
+      setShowSkipIntro(false);
+    }
+  };
+
+  // Skip outro handler (go to next episode if available)
+  const handleSkipOutro = () => {
+    setShowSkipOutro(false);
+    onNextEpisode?.(); // Trigger next episode if available
   };
 
   // Format time display
@@ -392,15 +420,31 @@ export function VideoPlayer({
 
             <div className="flex items-center space-x-4">
               
-              {/* Skip intro button (placeholder for future implementation) */}
-              <Button
-                variant="secondary"
-                size="sm"
-                className="bg-white/20 hover:bg-white/30 text-white"
-                data-testid="skip-intro-button"
-              >
-                Skip Intro
-              </Button>
+              {/* Skip intro button - shows during intro sequence */}
+              {showSkipIntro && (
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={handleSkipIntro}
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
+                  data-testid="skip-intro-button"
+                >
+                  Skip Intro
+                </Button>
+              )}
+
+              {/* Skip outro button - shows during outro sequence */}
+              {showSkipOutro && onNextEpisode && (
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={handleSkipOutro}
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
+                  data-testid="skip-outro-button"
+                >
+                  Next Episode
+                </Button>
+              )}
 
               {/* Quality settings */}
               <Button

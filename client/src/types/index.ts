@@ -40,6 +40,9 @@ export interface Episode {
   thumbnailUrl?: string; // Episode thumbnail image
   videoUrl: string; // External video stream URL
   duration?: number; // Episode duration in seconds
+  introStart?: number; // Intro start timestamp in seconds for skip functionality
+  introEnd?: number; // Intro end timestamp in seconds for skip functionality
+  outroStart?: number; // Outro start timestamp in seconds for skip functionality
   createdAt: string; // Creation timestamp
   updatedAt: string; // Last update timestamp
 }

@@ -61,6 +61,9 @@ export const episodes = pgTable("episodes", {
   thumbnailUrl: text("thumbnail_url"), // Episode thumbnail image URL
   videoUrl: text("video_url").notNull(), // External video stream URL (not hosted locally)
   duration: integer("duration"), // Episode duration in seconds
+  introStart: integer("intro_start"), // Intro start timestamp in seconds for skip functionality
+  introEnd: integer("intro_end"), // Intro end timestamp in seconds for skip functionality
+  outroStart: integer("outro_start"), // Outro start timestamp in seconds for skip functionality
   createdAt: timestamp("created_at").defaultNow().notNull(), // When episode was added
   updatedAt: timestamp("updated_at").defaultNow().notNull(), // Last episode update
 });

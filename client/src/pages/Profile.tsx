@@ -24,6 +24,7 @@ import { Progress } from "@/components/ui/progress";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
 import { AnimeCard } from "@/components/anime/AnimeCard";
+import { EditProfileDialog } from "@/components/profile/EditProfileDialog";
 import { useAuth } from "@/hooks/useAuth";
 import { watchApi, watchlistApi, favoritesApi } from "@/lib/api";
 import { formatDistanceToNow } from "date-fns";
@@ -32,6 +33,7 @@ import { formatDistanceToNow } from "date-fns";
 export default function Profile() {
   const { user, isAuthenticated } = useAuth(); // Authentication context
   const [activeTab, setActiveTab] = useState("history"); // Active tab state
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false); // Edit profile dialog state
 
   // Redirect if not authenticated
   if (!isAuthenticated || !user) {
