@@ -194,10 +194,10 @@ export class PostgreSQLStorage implements IStorage {
   }
 
   async searchAnime(query: string, status?: AnimeStatus): Promise<Anime[]> {
-    let whereClause = ilike(anime.title, `%${query}%`);
-    if (status) {
-      whereClause = and(whereClause, eq(anime.status, status));
-    }
+    const titleCondition = ilike(anime.title, `%${query}%`);
+    const whereClause = status 
+      ? and(titleCondition, eq(anime.status, status))
+      : titleCondition;
     
     return await db.select().from(anime)
       .where(whereClause)
@@ -319,7 +319,8 @@ export class PostgreSQLStorage implements IStorage {
       LIMIT 8
     `;
     
-    return await db.execute(query);
+    const result = await db.execute(query);
+    return result.rows as any[];
   }
 
   // Watchlist methods
@@ -408,7 +409,7 @@ export class PostgreSQLStorage implements IStorage {
       ...comment,
       createdAt: new Date(),
       updatedAt: new Date(),
-    }).returning();
+    }).returning() as Comment[];
     return result[0];
   }
 
