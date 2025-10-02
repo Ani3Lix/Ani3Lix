@@ -72,7 +72,7 @@ export default function Home() {
             </h1>
           </div>
           
-          {/* Navigation links (placeholder for future implementation) */}
+          {/* Navigation links */}
           <div className="flex items-center space-x-4">
             {/* 
               flex: Flexbox layout
@@ -80,14 +80,17 @@ export default function Home() {
               space-x-4: Horizontal spacing between links
             */}
             
-            {/* Future navigation items will go here */}
-            <span className="text-muted-foreground text-sm">
-              {/* 
-                text-muted-foreground: Subtle text color
-                text-sm: Small text size
-              */}
-              Navigation coming soon...
-            </span>
+            {/* Authentication links */}
+            <Link href="/login">
+              <Button variant="ghost" size="sm" data-testid="link-login">
+                Sign In
+              </Button>
+            </Link>
+            <Link href="/register">
+              <Button size="sm" data-testid="link-register">
+                Sign Up
+              </Button>
+            </Link>
           </div>
         </nav>
       </header>
@@ -138,25 +141,29 @@ export default function Home() {
           */}
           
           {/* Primary CTA button */}
-          <Button size="lg" className="gap-2">
-            {/* 
-              size="lg": Large button size
-              gap-2: Space between icon and text
-            */}
-            <Play className="w-5 h-5" /> {/* Play icon - 20px size */}
-            Start Watching
-          </Button>
+          <Link href="/register">
+            <Button size="lg" className="gap-2" data-testid="button-start-watching">
+              {/* 
+                size="lg": Large button size
+                gap-2: Space between icon and text
+              */}
+              <Play className="w-5 h-5" /> {/* Play icon - 20px size */}
+              Start Watching
+            </Button>
+          </Link>
           
           {/* Secondary CTA button */}
-          <Button size="lg" variant="outline" className="gap-2">
-            {/* 
-              size="lg": Large button size
-              variant="outline": Outlined button style
-              gap-2: Space between icon and text
-            */}
-            <TrendingUp className="w-5 h-5" /> {/* Trending icon - 20px size */}
-            Browse Trending
-          </Button>
+          <Link href="/register">
+            <Button size="lg" variant="outline" className="gap-2" data-testid="button-browse-trending">
+              {/* 
+                size="lg": Large button size
+                variant="outline": Outlined button style
+                gap-2: Space between icon and text
+              */}
+              <TrendingUp className="w-5 h-5" /> {/* Trending icon - 20px size */}
+              Browse Trending
+            </Button>
+          </Link>
         </div>
         
         {/* Feature highlights grid */}

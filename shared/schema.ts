@@ -152,6 +152,7 @@ export const insertAnimeSchema = createInsertSchema(anime).pick({
   rating: true,
   episodeCount: true,
   year: true,
+  createdBy: true,
 });
 
 export const insertEpisodeSchema = createInsertSchema(episodes).pick({
